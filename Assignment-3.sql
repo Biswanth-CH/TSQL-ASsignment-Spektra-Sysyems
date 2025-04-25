@@ -20,7 +20,7 @@ JOIN Person.Address custAddr ON custBEA.AddressID = custAddr.AddressID
 JOIN Person.BusinessEntityAddress salesBEA ON salesRep.BusinessEntityID = salesBEA.BusinessEntityID
 JOIN Person.Address salesAddr ON salesBEA.AddressID = salesAddr.AddressID
 
-WHERE custAddr.City <> salesAddr.City
+WHERE custAddr.City != salesAddr.City
   AND salesRep.CommissionPct > 0.0012;
 
 select CommissionPct from Sales.SalesPerson; -- Commision values
