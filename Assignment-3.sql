@@ -102,7 +102,7 @@ ORDER BY
 
 
 	-- 6. Customers with or without orders
-	SELECT 
+		SELECT 
 		p.FirstName + ' ' + p.LastName AS CustomerName,
 		addr.City,
 		soh.SalesOrderID AS OrderNumber,
@@ -113,8 +113,9 @@ ORDER BY
 	JOIN Person.Person p ON c.PersonID = p.BusinessEntityID
 	LEFT JOIN Sales.SalesOrderHeader soh ON c.CustomerID = soh.CustomerID
 	LEFT JOIN Person.BusinessEntityAddress bea ON p.BusinessEntityID = bea.BusinessEntityID
-	LEFT JOIN Person.Address addr ON bea.AddressID = addr.AddressID
+	LEFT JOIN Person.Address addr ON addr.AddressID = soh.ShipToAddressID
 	ORDER BY soh.OrderDate;
+
 
 
 	-- 7. Employees with job titles starting with 'Sales'
