@@ -46,16 +46,24 @@ Sales.SalesPerson sp
 
 
 	-- 3. Salary difference in Department ID 16
-	WITH Dept16 AS (
-	  SELECT e.BusinessEntityID, e.JobTitle, p.FirstName + ' ' + p.LastName AS EmpName, ph.Rate
-	  FROM HumanResources.Employee e
-	  JOIN HumanResources.EmployeeDepartmentHistory d ON e.BusinessEntityID = d.BusinessEntityID
-	  JOIN HumanResources.EmployeePayHistory ph ON e.BusinessEntityID = ph.BusinessEntityID
-	  JOIN Person.Person p ON e.BusinessEntityID = p.BusinessEntityID
-	  WHERE d.DepartmentID = 16 AND d.EndDate IS NULL
-	)
-	SELECT JobTitle, EmpName, (MAX(Rate) OVER() - Rate) AS SalaryDiff
-	FROM Dept16;
+		SELECT 
+    emp.JobTitle,
+    per.FirstName + ' ' + per.LastName AS FullName,
+    (MAX(pay.Rate) OVER() - pay.Rate) AS PayGap
+FROM 
+    HumanResources.Employee emp
+JOIN 
+    HumanResources.EmployeeDepartmentHistory deptHist ON emp.BusinessEntityID = deptHist.BusinessEntityID
+JOIN 
+    HumanResources.Department dept ON deptHist.DepartmentID = dept.DepartmentID
+JOIN 
+    HumanResources.EmployeePayHistory pay ON emp.BusinessEntityID = pay.BusinessEntityID
+JOIN 
+    Person.Person per ON emp.BusinessEntityID = per.BusinessEntityID
+WHERE 
+    dept.DepartmentID = 16
+ORDER BY 
+    FullName;
 
 	SELECT DepartmentID from HumanResources.EmployeeDepartmentHistory; -- Departments available
 
