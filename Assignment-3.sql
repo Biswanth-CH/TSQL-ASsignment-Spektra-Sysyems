@@ -112,7 +112,6 @@ ORDER BY
 		Sales.Customer c
 	JOIN Person.Person p ON c.PersonID = p.BusinessEntityID
 	LEFT JOIN Sales.SalesOrderHeader soh ON c.CustomerID = soh.CustomerID
-	LEFT JOIN Person.BusinessEntityAddress bea ON p.BusinessEntityID = bea.BusinessEntityID
 	LEFT JOIN Person.Address addr ON addr.AddressID = soh.ShipToAddressID
 	ORDER BY soh.OrderDate;
 
