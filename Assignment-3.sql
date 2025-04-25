@@ -53,16 +53,16 @@ Sales.SalesPerson sp
     (MAX(ph.Rate) OVER() - ph.Rate) AS SalaryDifference
 FROM 
     HumanResources.Employee e
-INNER JOIN 
+JOIN 
     HumanResources.EmployeeDepartmentHistory edh 
     ON e.BusinessEntityID = edh.BusinessEntityID
-INNER JOIN 
+JOIN 
     HumanResources.Department d 
     ON edh.DepartmentID = d.DepartmentID
-INNER JOIN 
+JOIN 
     HumanResources.EmployeePayHistory ph 
     ON e.BusinessEntityID = ph.BusinessEntityID
-INNER JOIN 
+JOIN 
     Person.Person p 
     ON e.BusinessEntityID = p.BusinessEntityID
 WHERE 
