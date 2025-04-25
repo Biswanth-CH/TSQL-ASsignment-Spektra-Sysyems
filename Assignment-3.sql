@@ -32,7 +32,6 @@ select CommissionPct from Sales.SalesPerson; -- Commision values
 		c.CustomerID,
 		custPerson.FirstName + ' ' + custPerson.LastName AS CustomerName,
 		addr.City AS CustomerCity,
-		NULL AS Grade,
 		soh.SalesOrderID AS OrderNumber,
 		soh.OrderDate,
 		soh.TotalDue AS OrderAmount
